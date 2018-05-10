@@ -11,10 +11,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifdef PTHREADS
+
+#include <pthread.h>
+
+#endif
+
 void Counter_Init(counter_handle c, int value)
 {
 	c->value = value;
 	c->spinlock = (spinlock_handle)malloc(sizeof(spinlock_t));
+#ifdef PTHREADS
+	pthread_mutex_init(&c->spinlock->lock, NULL);
+#endif
 }
 
 int Counter_GetValue(counter_handle c)
