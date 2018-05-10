@@ -9,9 +9,21 @@
 #ifndef spin_h
 #define spin_h
 
+#ifdef PTHREADS
+
+#include <pthread.h>
+
+struct spinlock_t {
+	pthread_mutex_t lock;
+};
+
+#else
+
 struct spinlock_t {
 	volatile unsigned int flag;
 };
+
+#endif
 
 typedef struct spinlock_t spinlock_t;
 typedef spinlock_t * spinlock_handle;
