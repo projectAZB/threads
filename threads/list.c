@@ -12,6 +12,12 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#ifdef PTHREADS
+
+#include <pthread.h>
+
+#endif
+
 struct node_t {
 	unsigned int key;
 	void * value;
@@ -39,6 +45,11 @@ void List_Init(list_handle list)
 	list->head = NULL;
 	list->count = 0;
 	list->spinlock = (spinlock_handle)malloc(sizeof(spinlock_t));
+#ifdef PTHREADS
+	
+	pthread_mutex_init(&list->spinlock->lock, NULL);
+	
+#endif
 }
 
 void List_Insert(list_handle list, void * element, unsigned int key)
