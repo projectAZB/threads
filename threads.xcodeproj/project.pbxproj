@@ -12,6 +12,7 @@
 		664D762720A3A34B0009C7E8 /* counter.c in Sources */ = {isa = PBXBuildFile; fileRef = 664D762620A3A34B0009C7E8 /* counter.c */; };
 		664D762A20A3A35C0009C7E8 /* list.c in Sources */ = {isa = PBXBuildFile; fileRef = 664D762920A3A35C0009C7E8 /* list.c */; };
 		664D762D20A3A37E0009C7E8 /* hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 664D762C20A3A37E0009C7E8 /* hash.c */; };
+		664D762F20A412980009C7E8 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 664D762E20A412980009C7E8 /* Makefile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,6 +38,7 @@
 		664D762920A3A35C0009C7E8 /* list.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = list.c; sourceTree = "<group>"; };
 		664D762B20A3A37E0009C7E8 /* hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
 		664D762C20A3A37E0009C7E8 /* hash.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = hash.c; sourceTree = "<group>"; };
+		664D762E20A412980009C7E8 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 		664D761720A391A20009C7E8 /* threads */ = {
 			isa = PBXGroup;
 			children = (
+				664D762E20A412980009C7E8 /* Makefile */,
 				664D761820A391A20009C7E8 /* main.c */,
 				664D762220A3A30C0009C7E8 /* spin.h */,
 				664D762320A3A30C0009C7E8 /* spin.c */,
@@ -83,6 +86,23 @@
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		664D763020A4158D0009C7E8 /* test */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "";
+			buildConfigurationList = 664D763120A4158D0009C7E8 /* Build configuration list for PBXLegacyTarget "test" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = /Users/adam/Documents/threads/threads;
+			dependencies = (
+			);
+			name = test;
+			passBuildSettingsInEnvironment = 0;
+			productName = test;
+		};
+/* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
 		664D761420A391A20009C7E8 /* threads */ = {
@@ -114,6 +134,9 @@
 					664D761420A391A20009C7E8 = {
 						CreatedOnToolsVersion = 9.3;
 					};
+					664D763020A4158D0009C7E8 = {
+						CreatedOnToolsVersion = 9.3;
+					};
 				};
 			};
 			buildConfigurationList = 664D761020A391A20009C7E8 /* Build configuration list for PBXProject "threads" */;
@@ -129,6 +152,7 @@
 			projectRoot = "";
 			targets = (
 				664D761420A391A20009C7E8 /* threads */,
+				664D763020A4158D0009C7E8 /* test */,
 			);
 		};
 /* End PBXProject section */
@@ -138,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				664D762F20A412980009C7E8 /* Makefile in Sources */,
 				664D762D20A3A37E0009C7E8 /* hash.c in Sources */,
 				664D762720A3A34B0009C7E8 /* counter.c in Sources */,
 				664D761920A391A20009C7E8 /* main.c in Sources */,
@@ -276,6 +301,33 @@
 			};
 			name = Release;
 		};
+		664D763220A4158D0009C7E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 3XLC892T5U;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		664D763320A4158D0009C7E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 3XLC892T5U;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -293,6 +345,15 @@
 			buildConfigurations = (
 				664D761D20A391A20009C7E8 /* Debug */,
 				664D761E20A391A20009C7E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		664D763120A4158D0009C7E8 /* Build configuration list for PBXLegacyTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				664D763220A4158D0009C7E8 /* Debug */,
+				664D763320A4158D0009C7E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -22,7 +22,7 @@ void counter_test(int times)
 	{
 		counter_handle counter = (counter_handle)malloc(sizeof(counter_t));
 		Counter_Init(counter, -r);
-		int count_to = rand() % 1000000;
+		int count_to = rand() % 100000;
 		int sum = 0;
 		for (int i = 0; i < count_to; i++)
 		{
@@ -38,6 +38,7 @@ void counter_test(int times)
 		}
 		sum = sum + -r;
 		assert(Counter_GetValue(counter) == sum);
+		free(counter);
 	}
 }
 
@@ -47,7 +48,7 @@ void list_test(int times)
 	{
 		list_handle list = (list_handle)malloc(sizeof(list_t));
 		List_Init(list);
-		int operations = rand() % 1000000;
+		int operations = rand() % 100000;
 		int occupied[operations];
 		int numbers[operations];
 		for (int i = 0; i < operations; i++)
@@ -100,6 +101,12 @@ void list_test(int times)
 			}
 		}
 		assert(count == list->count);
+		for (int i = operations - 1; i >= 0; i--)
+		{
+			List_Delete(list, i);
+		}
+		assert(0 == list->count);
+		free(list);
 	}
 }
 
@@ -133,6 +140,12 @@ void hash_test(int times)
 			void * data = Hash_Lookup(hash, i);
 			assert(data == NULL);
 		}
+		for (int i = 0; i < hash->num_buckets; i++)
+		{
+			free(hash->buckets[i]);
+		}
+		free(hash->buckets);
+		free(hash);
 	}
 }
 
