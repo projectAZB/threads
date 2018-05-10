@@ -14,6 +14,7 @@
 
 #include "counter.h"
 #include "list.h"
+#include "hash.h"
 
 void counter_test(int times)
 {
@@ -104,7 +105,35 @@ void list_test(int times)
 
 void hash_test(int times)
 {
-	
+	for (int r = 0; r < times; r++)
+	{
+		int num_buckets = rand() / 1000;
+		hash_handle hash = (hash_handle)malloc(sizeof(hash_t));
+		Hash_Init(hash, num_buckets);
+		int items = rand() / 100000;
+		int numbers[items];
+		for (int i = 0; i < items; i++)
+		{
+			numbers[i] = i + 1;
+		}
+		for (int i = 0; i < items; i++)
+		{
+			Hash_Insert(hash, &numbers[i], i);
+		}
+		for (int i = 0; i < items; i++)
+		{
+			void * data = Hash_Lookup(hash, i);
+			assert(data != NULL);
+			int data_int = *((int *)data);
+			assert(data_int == (i + 1));
+		}
+		for (int i = 0; i < items; i++)
+		{
+			Hash_Delete(hash, i);
+			void * data = Hash_Lookup(hash, i);
+			assert(data == NULL);
+		}
+	}
 }
 
 int main(int argc, const char * argv[])
@@ -112,5 +141,6 @@ int main(int argc, const char * argv[])
 	srand((unsigned int)time(NULL));
 	counter_test(10);
 	list_test(10);
+	hash_test(10);
 	return 0;
 }
