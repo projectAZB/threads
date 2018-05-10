@@ -107,6 +107,7 @@ void list_test(int times)
 			List_Delete(list, i);
 		}
 		assert(0 == list->count);
+		free(list->spinlock);
 		free(list);
 	}
 }
@@ -143,6 +144,7 @@ void hash_test(int times)
 		}
 		for (int i = 0; i < hash->num_buckets; i++)
 		{
+			free(hash->buckets[i]->spinlock);
 			free(hash->buckets[i]);
 		}
 		free(hash->buckets);
