@@ -9,6 +9,12 @@
 #ifndef hash_h
 #define hash_h
 
+#include "list.h"
+
+struct hash_t {
+	int num_buckets;
+	list_handle * buckets;
+};
 typedef struct hash_t hash_t;
 typedef hash_t * hash_handle;
 

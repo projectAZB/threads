@@ -9,6 +9,9 @@
 #ifndef counter_h
 #define counter_h
 
+struct counter_t {
+	int value;
+};
 typedef struct counter_t counter_t;
 typedef counter_t * counter_handle;
 

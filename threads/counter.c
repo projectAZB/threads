@@ -9,15 +9,9 @@
 #include "counter.h"
 
 #include <stdio.h>
-#include <stdlib.h>
-
-struct counter_t {
-	int value;
-};
 
 void Counter_Init(counter_handle c, int value)
 {
-	c = (counter_handle)malloc(sizeof(*c));
 	c->value = value;
 }
 

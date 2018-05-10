@@ -9,6 +9,14 @@
 #ifndef list_h
 #define list_h
 
+typedef struct node_t node_t;
+typedef node_t * node_handle;
+
+struct list_t {
+	unsigned int count;
+	node_handle head;
+	//one lock per list
+};
 typedef struct list_t list_t;
 typedef list_t * list_handle;
 

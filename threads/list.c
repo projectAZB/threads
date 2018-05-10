@@ -10,10 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct node_t node_t;
-
-typedef node_t * node_handle;
+#include <assert.h>
 
 struct node_t {
 	unsigned int key;
@@ -37,15 +34,8 @@ void destroy_node(node_handle node)
 	free(node);
 }
 
-struct list_t {
-	unsigned int count;
-	node_handle head;
-	//one lock per list
-};
-
 void List_Init(list_handle list)
 {
-	list = (list_handle)malloc(sizeof(*list));
 	list->head = NULL;
 	list->count = 0;
 }
@@ -57,9 +47,14 @@ void List_Insert(list_handle list, void * element, unsigned int key)
 		new->next = list->head;
 		list->head->previous = new;
 		list->head = new;
+		(list->count)++;
+		return;
 	}
-	else { //list->head == NULL
+	else { //list->head == NULL, list is empty
+		assert(list->count == 0);
 		list->head = create_node(key, element);
+		(list->count)++;
+		return;
 	}
 }
 
@@ -71,8 +66,10 @@ void List_Delete(list_handle list, unsigned int key)
 		
 		if (node->key == key) { //key matches, delete
 			if (node == list->head) { //have to delete the head
+				if (next) {
+					next->previous = NULL;
+				}
 				destroy_node(node);
-				next->previous = NULL;
 				list->head = next;
 				(list->count)--;
 				return;
@@ -104,6 +101,7 @@ void * List_Lookup(list_handle list, unsigned int key)
 		if (node->key == key) {
 			return node->value;
 		}
+		node = node->next;
 	}
 	return NULL;
 }

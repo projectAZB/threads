@@ -10,21 +10,13 @@
 
 #include <stdlib.h>
 
-#include "list.h"
-
-struct hash_t {
-	int num_buckets;
-	list_handle * buckets;
-};
-
 void Hash_Init(hash_handle hash, int buckets)
 {
-	hash = (hash_handle)malloc(sizeof(*hash));
 	hash->num_buckets = buckets;
 	hash->buckets = (list_handle *)malloc(sizeof(list_handle) * buckets);
 	for (int i = 0; i < buckets; i++)
 	{
-		list_handle list = NULL;
+		list_handle list = (list_handle)malloc(sizeof(*list));
 		List_Init(list);
 		hash->buckets[i] = list;
 	}
