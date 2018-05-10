@@ -9,6 +9,10 @@
 #ifndef spin_h
 #define spin_h
 
+struct spinlock_t {
+	volatile unsigned int flag;
+};
+
 typedef struct spinlock_t spinlock_t;
 typedef spinlock_t * spinlock_handle;
 

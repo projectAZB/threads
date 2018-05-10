@@ -38,6 +38,7 @@ void counter_test(int times)
 		}
 		sum = sum + -r;
 		assert(Counter_GetValue(counter) == sum);
+		free(counter->spinlock);
 		free(counter);
 	}
 }

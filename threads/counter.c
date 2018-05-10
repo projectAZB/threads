@@ -9,10 +9,12 @@
 #include "counter.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 
 void Counter_Init(counter_handle c, int value)
 {
 	c->value = value;
+	c->spinlock = (spinlock_handle)malloc(sizeof(spinlock_t));
 }
 
 int Counter_GetValue(counter_handle c)
@@ -22,10 +24,14 @@ int Counter_GetValue(counter_handle c)
 
 void Counter_Increment(counter_handle c)
 {
+	spinlock_acquire(c->spinlock);
 	(c->value)++;
+	spinlock_release(c->spinlock);
 }
 
 void Counter_Decrement(counter_handle c)
 {
+	spinlock_acquire(c->spinlock);
 	(c->value)--;
+	spinlock_release(c->spinlock);
 }

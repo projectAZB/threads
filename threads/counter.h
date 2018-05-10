@@ -9,8 +9,11 @@
 #ifndef counter_h
 #define counter_h
 
+#include "spin.h"
+
 struct counter_t {
 	int value;
+	spinlock_handle spinlock;
 };
 typedef struct counter_t counter_t;
 typedef counter_t * counter_handle;

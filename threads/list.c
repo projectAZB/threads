@@ -38,28 +38,30 @@ void List_Init(list_handle list)
 {
 	list->head = NULL;
 	list->count = 0;
+	list->spinlock = (spinlock_handle)malloc(sizeof(spinlock_t));
 }
 
 void List_Insert(list_handle list, void * element, unsigned int key)
 {
+	spinlock_acquire(list->spinlock);
 	if (list->head) {
 		node_handle new = create_node(key, element);
 		new->next = list->head;
 		list->head->previous = new;
 		list->head = new;
 		(list->count)++;
-		return;
 	}
 	else { //list->head == NULL, list is empty
 		assert(list->count == 0);
 		list->head = create_node(key, element);
 		(list->count)++;
-		return;
 	}
+	spinlock_release(list->spinlock);
 }
 
 void List_Delete(list_handle list, unsigned int key)
 {
+	spinlock_acquire(list->spinlock);
 	node_handle node = list->head;
 	while (node != NULL) {
 		node_handle next = node->next;
@@ -72,12 +74,14 @@ void List_Delete(list_handle list, unsigned int key)
 				destroy_node(node);
 				list->head = next;
 				(list->count)--;
+				spinlock_release(list->spinlock);
 				return;
 			}
 			else if (next == NULL) { //have to delete the tail
 				node->previous->next = NULL;
 				destroy_node(node);
 				(list->count)--;
+				spinlock_release(list->spinlock);
 				return;
 			}
 			else { //some node in the middle
@@ -86,12 +90,14 @@ void List_Delete(list_handle list, unsigned int key)
 				next->previous = previous;
 				destroy_node(node);
 				(list->count)--;
+				spinlock_release(list->spinlock);
 				return;
 			}
 		}
 		
 		node = next;
 	}
+	spinlock_release(list->spinlock);
 }
 
 void * List_Lookup(list_handle list, unsigned int key)
