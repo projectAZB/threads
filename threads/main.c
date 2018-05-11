@@ -184,7 +184,6 @@ int main(int argc, const char * argv[])
 	list_test(10, 4);
 	list_test(10, 8);
 	list_test(10, 12);
-	list_test(10, 14);
 	list_test(10, 16);
 	list_test(10, 20);
 	//hash-table insertion test
