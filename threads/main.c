@@ -99,7 +99,7 @@ void * list_insert(void * list)
 {
 	for (int i = 0; i < MAX; i++)
 	{
-		List_Insert((list_handle)list, &numbers[i], i);
+		List_Insert((list_handle)list, &numbers[i], ((i * rand()) % MAX));
 	}
 	return NULL;
 }
@@ -135,7 +135,7 @@ void * hash_insert(void * hash)
 {
 	for (int i = 0; i < MAX; i++)
 	{
-		Hash_Insert((hash_handle)hash, &numbers[i], numbers[i]);
+		Hash_Insert((hash_handle)hash, &numbers[i], ((i * rand()) % MAX));
 	}
 	return NULL;
 }
@@ -193,10 +193,10 @@ int main(int argc, const char * argv[])
 	hash_test(10, 16, 1000);
 	hash_test(10, 20, 1000);
 	//hash-table scaling test
-	hash_test(10, 16, 10);
-	hash_test(10, 16, 100);
-	hash_test(10, 16, 1000);
-	hash_test(10, 16, 10000);
-	hash_test(10, 16, 100000);
+	hash_test(10, 12, 10);
+	hash_test(10, 12, 100);
+	hash_test(10, 12, 1000);
+	hash_test(10, 12, 10000);
+	hash_test(10, 12, 100000);
 	return 0;
 }
