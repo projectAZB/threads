@@ -19,7 +19,6 @@
 
 #endif
 
-/*
 static inline uint
 xchg(volatile unsigned int *addr, unsigned int newval)
 {
@@ -34,19 +33,13 @@ xchg(volatile unsigned int *addr, unsigned int newval)
 	//"cc" means the condition register might be altered
 	return result;
 }
- */
 
 void spinlock_acquire(spinlock_handle lock) {
 #ifdef PTHREADS
 	pthread_mutex_lock(&lock->lock);
 #else
-	/*
 	while (xchg(&lock->flag, 1) == 1) { //spin
-		
 	}
-	//lock->flag == 1
-	assert(lock->flag == 1);
-	 */
 #endif
 	
 }
@@ -56,6 +49,6 @@ void spinlock_release(spinlock_handle lock) {
 #ifdef PTHREADS
 	pthread_mutex_unlock(&lock->lock);
 #else
-	//xchg(&lock->flag, 0);
+	lock->flag = 0;
 #endif
 }
