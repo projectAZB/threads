@@ -99,7 +99,7 @@ void * list_insert(void * list)
 {
 	for (int i = 0; i < MAX; i++)
 	{
-		List_Insert((list_handle)list, &numbers[i], ((i * rand()) % MAX));
+		List_Insert((list_handle)list, &numbers[i], i);
 	}
 	return NULL;
 }
